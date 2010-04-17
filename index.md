@@ -160,7 +160,7 @@ Installers
 
 Installers are different mechanisms of getting software onto the target machine. There are different scripts that allow to download/compile software from source, use packaging systems (such as apt-get), simply copy files, and even inject content into existing files.
 
-- ### **common**
+- ### **installer**
 
   Base installer inherited in all installers. Provides pre/post install hooks.
   
