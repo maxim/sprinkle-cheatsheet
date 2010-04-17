@@ -13,25 +13,26 @@ Options
 
 Example
 
-    # package :package_name, :provides => :virtual_package_name do
-    #   ... installers, options, verifiers ...
-    # end
+        # package :package_name, :provides => :virtual_package_name do
+        #   ... installers, options, verifiers ...
+        # end
 
-    package :postgres, :provides => :database do
-      source 'http://example.com/postgres.tgz'
-      requires :build_essential
-      verify { has_executable 'psql' }
-    end
+        package :postgres, :provides => :database do
+          source 'http://example.com/postgres.tgz'
+          requires :build_essential
+          verify { has_executable 'psql' }
+        end
 
 Actors
 ------
 
 - ### **capistrano**
-  
+
   Uses capistrano to talk to remote computer.
     
-    Options
-    - *recipes* "recipe_name" (default: "deploy")
+  ##### Options
+
+  - *recipes* "recipe_name" (default: "deploy")
     
 - ### **local**
   
@@ -41,43 +42,45 @@ Actors
 
   Uses ssh (directly) to talk to remote computer.
     
-    Options
-    - *roles*
-    - *gateway*
-    - *user* (default: "root")
-    - *password*
+  ##### Options
+
+  - *roles*
+  - *gateway*
+  - *user* (default: "root")
+  - *password*
     
 - ### **vlad**
 
   Uses vlad to talk to remote computer.
     
-    Options
-    - script "deploy"
+  ##### Options
+
+  - script "deploy"
     
 
 Deployment Options
 ------------------
 
-    deployment do
-      # Choose a delivery actor with native settings.
-      # See: Actors
-      #
-      # delivery :actor do
-      #   ... actor settings ...
-      # end
+        deployment do
+          # Choose a delivery actor with native settings.
+          # See: Actors
+          #
+          # delivery :actor do
+          #   ... actor settings ...
+          # end
 
-      delivery :capistrano do
-        recipes 'deploy'
-      end
+          delivery :capistrano do
+            recipes 'deploy'
+          end
     
-      # Specify installation options for certain installers.
-      # (Normally only global options for source installer.)
-      source do
-        prefix    '/usr/local'
-        archives  '/usr/local/sources'
-        builds    '/usr/local/build'
-      end
-    end
+          # Specify installation options for certain installers.
+          # (Normally only global options for source installer.)
+          source do
+            prefix    '/usr/local'
+            archives  '/usr/local/sources'
+            builds    '/usr/local/build'
+          end
+        end
 
 Installers
 ----------
@@ -86,7 +89,7 @@ Installers
 
   Base installer inherited in all installers. Provides pre/post install hooks.
   
-  Hooks
+  ##### Hooks
 
   - pre 'echo "foo"'  
     pre ['echo "foo"', 'echo "bar"']  
@@ -101,10 +104,11 @@ Installers
 
   Installs using apt-get
   
-  Options
+  ##### Options
+
   - *dependency_only* (default: false)
 
-  Example
+  ##### Example
 
         apt 'foo_package' { :dependencies_only => true }
 
@@ -112,11 +116,11 @@ Installers
 
   Installs a precompiled binary from archive.
   
-  Options
+  ##### Options
   - *prefix* "/usr/local"
   - *archives* "/usr/local/archives"
 
-  Example
+  ##### Example
 
         binary "http://some.url.com/archive.tar.gz" do
           prefix "/home/user/local"
@@ -127,7 +131,7 @@ Installers
 
   Runs gem install.
   
-  Options
+  ##### Options
   - *source* "http://gems.github.com" (adds --source)
   - *version* "2.4.5" (adds --version)
   - *repository* "foo" (adds --install-dir)
@@ -135,7 +139,7 @@ Installers
   - *http-proxy* (adds --http-proxy)
   - *build_flags* (adds build flags to the gem)
   
-  Example
+  ##### Example
   
         gem 'magic_beans_package' do
           source 'http://gems.github.com'
@@ -145,10 +149,11 @@ Installers
 
   Appends text to file.
   
-  Options
+  ##### Options
+
   - *sudo* true (default: false)
   
-  Example
+  ##### Example
   
         package :magic_beans do
           push_text 'magic_beans', '/etc/apache2/apache2.conf', :sudo => true
@@ -158,10 +163,11 @@ Installers
 
   Runs a rake command.
   
-  Options
+  ##### Options
+
   - *rakefile* "/path/to/rakefile"
   
-  Example
+  ##### Example
 
         package :spec, :rakefile => "/var/setup/Rakefile" do
           rake 'spec'
@@ -171,7 +177,7 @@ Installers
 
   Downloads, extracts, configures, builds, installs from source.
   
-  Hooks
+  ##### Hooks
   - pre/post :prepare
   - pre/post :download
   - pre/post :extract
@@ -179,14 +185,14 @@ Installers
   - pre/post :build
   - pre/post :install
 
-  Options
+  ##### Options
   - *prefix* "/usr/local"
   - *builds* "/usr/local/builds"
   - *archives* "/usr/local/archives"
   - *custom_install* true (default: false)
   - *custom_archive* "foobar.tar.gz"
   
-  Example
+  ##### Example
 
         package :magic_beans do
           source 'http://magicbeansland.com/latest-1.1.1.tar.gz' do
@@ -201,12 +207,12 @@ Installers
 
   Pushes local files to remote servers, optionally rendering erb tags.
 
-  Options
+  ##### Options
   - *recursive* false (default: true if render => false)
   - *render* true (default: false)
   - *sudo* true (default: false)
   
-  Example
+  ##### Example
   
         package :nginx_conf do
           nginx_port = 8080
