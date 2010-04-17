@@ -5,13 +5,14 @@ title: Sprinkle Cheatsheet
 Packages
 --------
 
-Options
+##### Options
 
 - *requires* :ruby
 - *recommends* :ansi_color
 - *optional* :ansi_color
+- *verify* { ... specify verifiers (see verifiers) ... }
 
-Example
+##### Example
 
         # package :package_name, :provides => :virtual_package_name do
         #   ... installers, options, verifiers ...
@@ -22,6 +23,7 @@ Example
           requires :build_essential
           verify { has_executable 'psql' }
         end
+
 
 Actors
 ------
