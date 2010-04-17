@@ -2,8 +2,75 @@
 title: Sprinkle Cheatsheet
 ---
 
+Deployment Options
+------------------
+
+Deployment options go into the script which you run with sprinkle (e.g. install.rb).
+
+        deployment do
+          # Choose a delivery actor with native settings.
+          # See: Actors
+          #
+          # delivery :actor do
+          #   ... actor settings ...
+          # end
+
+          delivery :capistrano do
+            recipes 'deploy'
+          end
+    
+          # Specify installation options for certain installers.
+          # (Normally only global options for source installer.)
+          source do
+            prefix    '/usr/local'
+            archives  '/usr/local/sources'
+            builds    '/usr/local/build'
+          end
+        end
+
+Actors
+------
+
+Actors are mechanisms by which sprinkle will talk to target computer.
+
+- ### **capistrano**
+
+  Uses capistrano to talk to remote computer.
+
+  ##### Options
+
+  - *recipes* "recipe_name" (default: "deploy")
+
+- ### **local**
+
+  Talks to local computer.
+
+- ### **ssh**
+
+  Uses ssh (directly) to talk to remote computer.
+
+  ##### Options
+
+  - *roles*
+  - *gateway*
+  - *user* (default: "root")
+  - *password*
+
+- ### **vlad**
+
+  Uses vlad to talk to remote computer.
+
+  ##### Options
+
+  - script "deploy"
+
+
 Packages
 --------
+
+Packages are sets of installations, options, and verifications, grouped under a meaningful name. For example, there can be package called postgres. It installs postgres, verifies presence of necessary executables, specifies other packages it relies upon, and can serve as a dependency for other packages.
+
+Virtual Packages are providing you with options. For example, postgres, and mysql packages could be part of the virtual package called :database (using `:provides => :database` option). In such case when you run the script with sprinkle, you will get a choice of what to install for database.
 
 ##### Options
 
@@ -24,8 +91,11 @@ Packages
           verify { has_executable 'psql' }
         end
 
+
 Verifiers
 ---------
+
+Verifiers are convenient helpers to be used in package declarations. They will be automatically run to check if something was installed correctly.
 
 - **has\_directory** "/path/to/dir"  
   Tests if directory exists.
@@ -72,67 +142,10 @@ Verifiers
         end
 
 
-Actors
-------
-
-- ### **capistrano**
-
-  Uses capistrano to talk to remote computer.
-    
-  ##### Options
-
-  - *recipes* "recipe_name" (default: "deploy")
-    
-- ### **local**
-  
-  Talks to local computer.
-  
-- ### **ssh**
-
-  Uses ssh (directly) to talk to remote computer.
-    
-  ##### Options
-
-  - *roles*
-  - *gateway*
-  - *user* (default: "root")
-  - *password*
-    
-- ### **vlad**
-
-  Uses vlad to talk to remote computer.
-    
-  ##### Options
-
-  - script "deploy"
-    
-
-Deployment Options
-------------------
-
-        deployment do
-          # Choose a delivery actor with native settings.
-          # See: Actors
-          #
-          # delivery :actor do
-          #   ... actor settings ...
-          # end
-
-          delivery :capistrano do
-            recipes 'deploy'
-          end
-    
-          # Specify installation options for certain installers.
-          # (Normally only global options for source installer.)
-          source do
-            prefix    '/usr/local'
-            archives  '/usr/local/sources'
-            builds    '/usr/local/build'
-          end
-        end
-
 Installers
 ----------
+
+Installers are different mechanisms of getting software onto the target machine. There are different scripts that allow to download/compile software from source, use packaging systems (such as apt-get), simply copy files, and even inject content into existing files.
 
 - ### **common**
 
