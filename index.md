@@ -64,6 +64,19 @@ Actors are mechanisms by which sprinkle will talk to target computer.
 
   - script "deploy"
 
+Policies
+--------
+
+A policy is a list of packages (or virtual packages) to be installed on a particular server (or rather a server with a particular role). Hence, a package can have roles assigned to it. Roles should be originally defined in whatever is the config file of the _actor_ you chose to use. (See Actors)
+
+##### Example
+
+        policy :blog, :roles => :app do
+          requires :webserver
+          requires :database
+          requires :rails
+        end
+
 
 Packages
 --------
@@ -95,7 +108,7 @@ Virtual Packages are providing you with options. For example, postgres, and mysq
 Verifiers
 ---------
 
-Verifiers are convenient helpers to be used in package declarations. They will be automatically run to check if something was installed correctly.
+Verifiers are convenient helpers which you can use to check if something was installed correctly. You can use this helper within a verify block (see example below). Sprinkle runs the verify block to find out whether or not something is already installed on the target machine. This way things never get done twice.
 
 - **has\_directory** "/path/to/dir"  
   Tests if directory exists.
