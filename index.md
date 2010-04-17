@@ -24,6 +24,53 @@ Packages
           verify { has_executable 'psql' }
         end
 
+Verifiers
+---------
+
+- ### **has\_directory** "/path/to/dir"
+  Tests if directory exists.
+
+- ### **has\_executable** "executable\_name"
+  Tests if global executable is available.
+
+- ### **has\_executable** "/path/to/executable"
+  Tests if executable exists at particular path.
+
+- ### **has\_executable\_with\_version** "executable", "2.4.5", "-v"
+  Tests if executable (1st arg) exists, then runs it with -v (3rd arg, default: -v) and matches "2.4.5" (2nd arg) in output.
+
+- ### **has\_version\_in\_grep** "command", "2.4.5"
+  Tests if output of any command (1st arg) matches given version (2nd arg).
+
+- ### **has\_file** "/path/to/file"
+  Tests if specific file exists.
+
+- ### **file\_contains** "/path/to/file", "text"
+  Tests if specific file contains particular text.
+
+- ### **has\_process** "httpd"
+  Tests if specific process is running.
+
+- ### **ruby\_can\_load** "zlib", "readline", ...
+  Tests if ruby can require specified libraries. Loads requires rubygems automatically.
+
+- ### **has_gem** "haml", "3.0.0"
+  Tests if gem list has specified gem with optional specified version (2nd arg, default: nil)
+
+- ### **has_symlink** "/path/to/symlink", "/path/to/file"
+  Tests if symlink exists, and optionally tests if symlink targets a specific file (2nd arg, default: nil)
+
+##### Example
+
+        package :postgres, :provides => :database do
+          # ... installations, options ...
+        
+          verify do 
+            has_executable 'psql'
+            # ... more verifiers go here ...
+          end
+        end
+
 
 Actors
 ------
