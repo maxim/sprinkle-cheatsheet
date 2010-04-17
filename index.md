@@ -1,3 +1,7 @@
+---
+title: Sprinkle Cheatsheet
+---
+
 Packages
 --------
 
@@ -22,18 +26,18 @@ Example
 Actors
 ------
 
-- **capistrano**
+- ### **capistrano**
   
   Uses capistrano to talk to remote computer.
     
     Options
     - *recipes* "recipe_name" (default: "deploy")
     
-- **local**
+- ### **local**
   
   Talks to local computer.
   
-- **ssh**
+- ### **ssh**
 
   Uses ssh (directly) to talk to remote computer.
     
@@ -43,7 +47,7 @@ Actors
     - *user* (default: "root")
     - *password*
     
-- **vlad**
+- ### **vlad**
 
   Uses vlad to talk to remote computer.
     
@@ -78,22 +82,22 @@ Deployment Options
 Installers
 ----------
 
-- **common**
+- ### **common**
 
   Base installer inherited in all installers. Provides pre/post install hooks.
   
   Hooks
+
   - pre 'echo "foo"'  
     pre ['echo "foo"', 'echo "bar"']  
     pre { 'echo "foo"' }  
     pre { ['echo "foo"', 'echo "bar"'] }
-
   - post 'echo "foo"'  
     post ['echo "foo"', 'echo "bar"']  
     post { 'echo "foo"' }  
     post { ['echo "foo"', 'echo "bar"'] }
 
-- **apt**
+- ### **apt**
 
   Installs using apt-get
   
@@ -104,7 +108,7 @@ Installers
 
         apt 'foo_package' { :dependencies_only => true }
 
-- **binary**
+- ### **binary**
 
   Installs a precompiled binary from archive.
   
@@ -119,7 +123,7 @@ Installers
           archives "/home/user/sources"
         end
 
-- **gem**
+- ### **gem**
 
   Runs gem install.
   
@@ -137,7 +141,7 @@ Installers
           source 'http://gems.github.com'
         end
 
-- **push_text**
+- ### **push_text**
 
   Appends text to file.
   
@@ -150,7 +154,7 @@ Installers
           push_text 'magic_beans', '/etc/apache2/apache2.conf', :sudo => true
         end
 
-- **rake**
+- ### **rake**
 
   Runs a rake command.
   
@@ -163,7 +167,7 @@ Installers
           rake 'spec'
         end
 
-- **source**
+- ### **source**
 
   Downloads, extracts, configures, builds, installs from source.
   
@@ -193,7 +197,7 @@ Installers
           end
         end
 
-- **transfer**
+- ### **transfer**
 
   Pushes local files to remote servers, optionally rendering erb tags.
 
