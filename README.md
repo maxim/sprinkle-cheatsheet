@@ -5,9 +5,10 @@ Sprinkle Cheatsheet
 
 ## To do
 
-Please help me add a few things.
+Feel free to contribute these, or anything else you find missing.
 
-- List all installers (I only listed the ones I use).
+- List missing installers (I only listed the ones I use).
+- List missing verifiers (same as above).
 - Explain options better.
 
 ## License
