@@ -1,11 +1,16 @@
 ---
 title: Sprinkle Cheatsheet
+layout: default
 ---
+
+<h1 id="title">Sprinkle Cheatsheet</h1>
 
 Deployment Options
 ------------------
 
 Deployment options go into the script which you run with sprinkle (e.g. install.rb).
+
+##### Example
 
         deployment do
           # Choose a delivery actor with native settings.
